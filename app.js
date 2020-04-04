@@ -14,6 +14,20 @@ var app = Express();
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
 
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    );
+    if (req.method === "OPTIONS") {
+      res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+      return res.status(200).json({});
+    }
+    next();
+  });
+  
+
 app.listen(3000, () => {
     MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
         if(error) {
@@ -25,20 +39,20 @@ app.listen(3000, () => {
     });
 });
 
-app.post("/person", (request, response) => {
-    collection.insert(request.body, (error, result) => {
-        if(error) {
-            return response.status(500).send(error);
+app.post("/person", (req, res) => {
+    collection.insert(req.body, (err, result) => {
+        if(err) {
+            return res.status(500).send(err);
         }
-        response.send(result.result);
+        res.send(res.result);
     });
 });
 
-app.get("/people", (request, response) => {
-    collection.find({}).toArray((error, result) => {
-        if(error) {
-            return response.status(500).send(error);
+app.get("/people", (req, res, next) => {
+    collection.find({}).toArray((err, result) => {
+        if(err) {
+            return res.status(500).send(err);
         }
-        response.send(result);
+        res.send(result);
     });
 });
