@@ -1,9 +1,13 @@
 const mongoose = require('mongoose');
 
-const productSchema = mongoose.Schema({
+const gemeenteSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    name: String,
-    price: Number
-});
+    Gemeentecode: Number,
+    GemeentecodeGM: String,
+    Gemeentenaam: String,
+    Provinciecode: Number,
+    ProvinciecodePV: String,
+    Provincienaam: String
+}, { collection: 'gemeenten' });
 
-module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model('Gemeente', gemeenteSchema);

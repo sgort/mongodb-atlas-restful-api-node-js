@@ -1,15 +1,19 @@
 const Express = require("express");
 const BodyParser = require("body-parser");
+/**
+ * Required if `MongoClient.connect` is used in app.listen(3000, () => {
+ * 
 const MongoClient = require("mongodb").MongoClient;
-const ObjectId = require("mongodb").ObjectID;
+ */
+const mongoose = require("mongoose");
 const Morgan = require("morgan");
 
-const gemeenteRoutes = require("./api/routes/gemeente");
+const gemeenteRoutes = require("./api/routes/gemeenten");
 
 const CONNECTION_URL = "mongodb+srv://dbUser:" +
     process.env.MONGO_ATLAS_PW +
-    "@disciplmongodb-wc0s0.mongodb.net/test?retryWrites=true&w=majority";
-const DATABASE_NAME = "test";
+    "@disciplmongodb-wc0s0.mongodb.net/demo?retryWrites=true&w=majority";
+const DATABASE_NAME = "demo";
 
 const app = Express();
 
@@ -30,37 +34,38 @@ app.use((req, res, next) => {
     next();
 });
 
+/**
+ * Uses `MongoClient.connect` to connect to the DisciplMongoDB Atlas Sandbox  
+ *
 app.listen(3000, () => {
     MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
         if (error) {
             throw error;
         }
         database = client.db(DATABASE_NAME);
-        collection = database.collection("people");
+        collection = database.collection("gemeenten");
+        console.log("Connected to `" + DATABASE_NAME + "`!");
+    });
+});
+*/
+
+/**
+ * Uses `mongoose.connect` to connect to the DisciplMongoDB Atlas Sandbox
+ */
+app.listen(3000, () => {
+    mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
+        if (error) {
+            throw error;
+        }
         console.log("Connected to `" + DATABASE_NAME + "`!");
     });
 });
 
-// Routes which should handle requests
-app.use("/gemeente", gemeenteRoutes);
+/**
+ * Routes which should handle requests
+ */
+app.use("/gemeenten", gemeenteRoutes);
 
-app.post("/person", (req, res, next) => {
-    collection.insertOne(req.body, (err, result) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        res.send(result.result);
-    });
-});
-
-app.get("/person/:id", (req, res, next) => {
-    collection.findOne({ "_id": new ObjectId(req.params.id) }, (err, result) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        res.send(result);
-    });
-});
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
