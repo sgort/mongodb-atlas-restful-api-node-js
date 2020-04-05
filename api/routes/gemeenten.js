@@ -75,6 +75,23 @@ router.post("/", (req, res, next) => {
 });
 
 /**
+ * POST (ie CREATE) a serie of gemeenten in the collection
+ */
+router.post("/insertbatch", (req, res, next) => {
+    Gemeente.insertMany(req.body)
+        .then(result => {
+            console.log(result);
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+/**
  * PATCH (ie UPDATE) a specific gemeente in the collection by MongoDB Object.Id() key `_id`
  * Can handle incomplete set of properties
  */
