@@ -3,7 +3,9 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const Gemeente = require("../models/gemeente");
 
-
+/**
+ * GET (ie READ) all gemeenten in the collection
+ */
 router.get("/", (req, res, next) => {
     Gemeente.find()
         .exec()
@@ -19,7 +21,9 @@ router.get("/", (req, res, next) => {
         });
 });
 
-
+/**
+ * GET (ie READ) a specific gemeente in the collection by MongoDB Object.Id() key `_id`
+ */
 router.get("/:gemeenteId", (req, res, next) => {
     const id = req.params.gemeenteId;
     Gemeente.findById(id)
@@ -40,7 +44,9 @@ router.get("/:gemeenteId", (req, res, next) => {
         });
 });
 
-
+/**
+ * POST (ie CREATE) a single gemeente in the collection
+ */
 router.post("/", (req, res, next) => {
     const gemeente = new Gemeente({
         _id: new mongoose.Types.ObjectId(),
@@ -68,19 +74,42 @@ router.post("/", (req, res, next) => {
         });
 });
 
+/**
+ * PATCH (ie UPDATE) a specific gemeente in the collection by MongoDB Object.Id() key `_id`
+ * Can handle incomplete set of properties
+ */
+router.patch("/:gemeenteId", (req, res, next) => {
+    const id = req.params.gemeenteId;
+    Gemeente.updateMany({ _id: id }, { $set: req.body })
+        .exec()
+        .then(result => {
+            console.log(result);
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
+/**
+ * DELETE a specific gemeente in the collection by MongoDB Object.Id() key `_id`
+ */
 router.delete("/:gemeenteId", (req, res, next) => {
     const id = req.params.gemeenteId;
     Gemeente.deleteOne({ _id: id })
-      .exec()
-      .then(result => {
-        res.status(200).json(result);
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json({
-          error: err
+        .exec()
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
         });
-      });
-  });
+});
 
 module.exports = router;
