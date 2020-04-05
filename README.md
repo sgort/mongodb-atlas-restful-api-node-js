@@ -7,7 +7,9 @@ nodemon is used for automatically restarting the server when your code changes
 
 `npm start` is all you need after cloning the repo
 
-```> mongodb-atlas-restful-api-node-js@1.0.0 start /home/steven/Development/mongodb-atlas-restful-api-node-js
+```steven@steven-K501LX:~/Development/mongodb-atlas-restful-api-node-js$ npm start
+
+> mongodb-atlas-restful-api-node-js@1.0.0 start /home/steven/Development/mongodb-atlas-restful-api-node-js
 > nodemon app.js
 
 [nodemon] 2.0.2
@@ -16,6 +18,7 @@ nodemon is used for automatically restarting the server when your code changes
 [nodemon] watching extensions: js,mjs,json
 [nodemon] starting `node app.js`
 Connected to `demo`!
+
 ```
 
 
