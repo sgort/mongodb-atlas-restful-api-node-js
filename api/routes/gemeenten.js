@@ -1,45 +1,7 @@
 const express = require('express');
 const router = express.Router();
-/**
- * Required if `MongoClient.connect` is used in app.js
- * 
-const ObjectId = require("mongodb").ObjectID;
- */
 const mongoose = require("mongoose");
 const Gemeente = require("../models/gemeente");
-
-/**
- * Can be used if `MongoClient.connect` is used in app.js
- * 
-router.get("/", (req, res, next) => {
-    collection.find({}).toArray((err, result) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        res.send(result);
-    });
-});
-
-
-router.get("/:id", (req, res, next) => {
-    collection.findOne({ "_id": new ObjectId(req.params.id) }, (err, result) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        res.send(result);
-    });
-});
-
-
-router.post("/", (req, res, next) => {
-    collection.insertOne(req.body, (err, result) => {
-        if (err) {
-            return res.status(500).send(err);
-        }
-        res.send(result.result);
-    });
-});
- */
 
 
 router.get("/", (req, res, next) => {
@@ -79,7 +41,6 @@ router.get("/:gemeenteId", (req, res, next) => {
 });
 
 
-
 router.post("/", (req, res, next) => {
     const gemeente = new Gemeente({
         _id: new mongoose.Types.ObjectId(),
@@ -106,5 +67,20 @@ router.post("/", (req, res, next) => {
             });
         });
 });
+
+router.delete("/:gemeenteId", (req, res, next) => {
+    const id = req.params.gemeenteId;
+    Gemeente.deleteOne({ _id: id })
+      .exec()
+      .then(result => {
+        res.status(200).json(result);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+  });
 
 module.exports = router;
