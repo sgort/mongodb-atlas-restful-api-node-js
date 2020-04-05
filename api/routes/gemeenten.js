@@ -41,7 +41,6 @@ router.get("/:gemeenteId", (req, res, next) => {
 });
 
 
-
 router.post("/", (req, res, next) => {
     const gemeente = new Gemeente({
         _id: new mongoose.Types.ObjectId(),
@@ -68,5 +67,20 @@ router.post("/", (req, res, next) => {
             });
         });
 });
+
+router.delete("/:gemeenteId", (req, res, next) => {
+    const id = req.params.gemeenteId;
+    Gemeente.deleteOne({ _id: id })
+      .exec()
+      .then(result => {
+        res.status(200).json(result);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json({
+          error: err
+        });
+      });
+  });
 
 module.exports = router;
