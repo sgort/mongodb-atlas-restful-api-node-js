@@ -1,11 +1,6 @@
 const Express = require("express");
 const BodyParser = require("body-parser");
-/**
- * Required if `MongoClient.connect` is used in app.listen(3000, () => {
- * 
 const MongoClient = require("mongodb").MongoClient;
- */
-const mongoose = require("mongoose");
 const Morgan = require("morgan");
 
 const gemeenteRoutes = require("./api/routes/gemeenten");
@@ -34,9 +29,7 @@ app.use((req, res, next) => {
     next();
 });
 
-/**
- * Uses `MongoClient.connect` to connect to the DisciplMongoDB Atlas Sandbox  
- *
+
 app.listen(3000, () => {
     MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
         if (error) {
@@ -44,19 +37,6 @@ app.listen(3000, () => {
         }
         database = client.db(DATABASE_NAME);
         collection = database.collection("gemeenten");
-        console.log("Connected to `" + DATABASE_NAME + "`!");
-    });
-});
-*/
-
-/**
- * Uses `mongoose.connect` to connect to the DisciplMongoDB Atlas Sandbox
- */
-app.listen(3000, () => {
-    mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
-        if (error) {
-            throw error;
-        }
         console.log("Connected to `" + DATABASE_NAME + "`!");
     });
 });
