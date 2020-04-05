@@ -7,7 +7,8 @@ nodemon is used for automatically restarting the server when your code changes
 
 `npm start` is all you need after cloning the repo
 
-```steven@steven-K501LX:~/Development/mongodb-atlas-restful-api-node-js$ npm start
+```
+steven@steven-K501LX:~/Development/mongodb-atlas-restful-api-node-js$ npm start
 
 > mongodb-atlas-restful-api-node-js@1.0.0 start /home/steven/Development/mongodb-atlas-restful-api-node-js
 > nodemon app.js
