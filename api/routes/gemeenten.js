@@ -8,10 +8,25 @@ const Gemeente = require("../models/gemeente");
  */
 router.get("/", (req, res, next) => {
     Gemeente.find()
+        .select("GemeentecodeGM Gemeentenaam Provincienaam")
         .exec()
         .then(docs => {
+            const response = {
+                count: docs.length,
+                gemeenten: docs.map(doc => {
+                    return {
+                        GemeentecodeGM: doc.GemeentecodeGM,
+                        Gemeentenaam: doc.Gemeentenaam,
+                        Provincienaam: doc.Provincienaam,
+                        request: {
+                            type: "GET",
+                            url: "http://localhost:3000/gemeenten/" + doc.GemeentecodeGM
+                        }
+                    };
+                })
+            };
             console.log(docs);
-            res.status(200).json(docs);
+            res.status(200).json(response);
         })
         .catch(err => {
             console.log(err);
@@ -22,11 +37,11 @@ router.get("/", (req, res, next) => {
 });
 
 /**
- * GET (ie READ) a specific gemeente in the collection by MongoDB Object.Id() key `_id`
+ * GET (ie READ) a specific gemeente in the collection by `GemeentecodeGM`
  */
 router.get("/:gemeenteId", (req, res, next) => {
     const id = req.params.gemeenteId;
-    Gemeente.findById(id)
+    Gemeente.find({ GemeentecodeGM: { $eq: id} })
         .exec()
         .then(doc => {
             console.log("From database", doc);
@@ -51,7 +66,20 @@ router.post("/insert", (req, res, next) => {
     Gemeente.insertMany(req.body)
         .then(result => {
             console.log(result);
-            res.status(200).json(result);
+            res.status(201).json({
+                message: "Created gemeente(n) successfully",
+                gemeenten: result.map(doc => {
+                    return {
+                        GemeentecodeGM: doc.GemeentecodeGM,
+                        Gemeentenaam: doc.Gemeentenaam,
+                        Provincienaam: doc.Provincienaam,
+                        request: {
+                            type: "GET",
+                            url: "http://localhost:3000/gemeenten/" + doc.GemeentecodeGM
+                        }
+                    };
+                })
+            });
         })
         .catch(err => {
             console.log(err);
@@ -62,12 +90,12 @@ router.post("/insert", (req, res, next) => {
 });
 
 /**
- * PATCH (ie UPDATE) a specific gemeente in the collection by MongoDB Object.Id() key `_id`
+ * PATCH (ie UPDATE) a specific gemeente in the collection by `GemeentecodeGM`
  * Can handle incomplete set of properties
  */
 router.patch("/:gemeenteId", (req, res, next) => {
     const id = req.params.gemeenteId;
-    Gemeente.updateMany({ _id: id }, { $set: req.body })
+    Gemeente.updateMany({ GemeentecodeGM: { $eq: id} }, { $set: req.body })
         .exec()
         .then(result => {
             console.log(result);
@@ -82,11 +110,11 @@ router.patch("/:gemeenteId", (req, res, next) => {
 });
 
 /**
- * DELETE a specific gemeente in the collection by MongoDB Object.Id() key `_id`
+ * DELETE a specific gemeente in the collection by `GemeentecodeGM`
  */
 router.delete("/:gemeenteId", (req, res, next) => {
     const id = req.params.gemeenteId;
-    Gemeente.deleteOne({ _id: id })
+    Gemeente.deleteOne({ GemeentecodeGM: { $eq: id} })
         .exec()
         .then(result => {
             res.status(200).json(result);
