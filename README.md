@@ -27,10 +27,8 @@ Currently support these endpoints:
 
 - GET all gemeenten of the collection
 `localhost:3000/gemeenten`
-- POST a single gemeente into the collection
-`localhost:3000/gemeenten`
-- POST a serie of gemeenten into the collection
-`localhost:3000/gemeenten/insertbatch`
+- POST a single and/or a serie of gemeenten into the collection
+`localhost:3000/gemeenten/insert`
 - GET a single gemeente from the collection
 `localhost:3000/gemeenten/:_id`
 - DELETE a single gemeente from the collection
