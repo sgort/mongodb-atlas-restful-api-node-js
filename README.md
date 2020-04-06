@@ -30,11 +30,11 @@ Currently support these endpoints:
 - POST a single and/or a serie of gemeenten into the collection
 `localhost:3000/gemeenten/insert`
 - GET a single gemeente from the collection
-`localhost:3000/gemeenten/:_id`
+`localhost:3000/gemeenten/:GemeentecodeGM`
 - DELETE a single gemeente from the collection
-`localhost:3000/gemeenten/:_id`
+`localhost:3000/gemeenten/:GemeentecodeGM`
 - PATCH a single gemeente in the collection
-`localhost:3000/gemeenten/:_id`
+`localhost:3000/gemeenten/:GemeentecodeGM`
 
 
 ### Preview of DisciplMongoDB Atlas
