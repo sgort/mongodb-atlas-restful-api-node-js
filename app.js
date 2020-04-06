@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 app.listen(3000, () => {
-    mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
+    mongoose.connect(CONNECTION_URL, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
         if (error) {
             throw error;
         }

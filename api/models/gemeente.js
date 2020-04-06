@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 
 const gemeenteSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
     Gemeentecode: { type: Number, required: true},
-    GemeentecodeGM: { type: String, required: true},
+    GemeentecodeGM: { type: String, required: true, unique: true},
     Gemeentenaam: { type: String, required: true},
     Provinciecode: { type: Number, required: true},
     ProvinciecodePV: { type: String, required: true},
