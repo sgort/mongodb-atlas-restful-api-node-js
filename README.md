@@ -37,3 +37,6 @@ Currently support these endpoints:
 `localhost:3000/gemeenten/:_id`
 
  <br>*notice that the `_id` here is the MongoDB ObjectId*
+
+### Preview of DisciplMongoDB Atlas
+![Screenshot from 2020-04-06 11-18-33](https://user-images.githubusercontent.com/25812095/78544112-f178a880-77f9-11ea-80bf-09497b31c845.png)
