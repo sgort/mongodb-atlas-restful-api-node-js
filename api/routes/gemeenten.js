@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require("mongoose");
 const Gemeente = require("../models/gemeente");
 
 /**
@@ -41,7 +40,6 @@ router.get("/", (req, res, next) => {
 router.get("/:gemeenteId", (req, res, next) => {
     const id = req.params.gemeenteId;
     Gemeente.find({ GemeentecodeGM: { $eq: id } })
-        .select("GemeentecodeGM Gemeentenaam Provincienaam")
         .exec()
         .then(docs => {
             if (docs.length >= 1) {
@@ -62,14 +60,16 @@ router.get("/:gemeenteId", (req, res, next) => {
                 console.log(docs);
                 res.status(200).json(response);
             } else {
-                res
-                    .status(404)
-                    .json({ message: "No valid entry found for provided GemeentecodeGM" });
+                res.status(404).json({
+                    message: "No valid Gemeente found for provided GemeentecodeGM"
+                });
             }
         })
         .catch(err => {
             console.log(err);
-            res.status(500).json({ error: err });
+            res.status(500).json({
+                error: err
+            });
         });
 });
 
@@ -109,10 +109,10 @@ router.post("/insert", (req, res, next) => {
  */
 router.patch("/:gemeenteId", (req, res, next) => {
     const id = req.params.gemeenteId;
-    Gemeente.updateMany({ GemeentecodeGM: { $eq: id } }, { $set: req.body })
+    Gemeente.updateMany({ GemeentecodeGM: { $eq: id } }, { $set: req.body }, { upsert: true })
         .exec()
         .then(result => {
-            console.log(result);
+            console.log(result)
             res.status(200).json({
                 message: "Gemeente succesfully updated!",
                 request: {
@@ -137,9 +137,16 @@ router.delete("/:gemeenteId", (req, res, next) => {
     Gemeente.deleteOne({ GemeentecodeGM: { $eq: id } })
         .exec()
         .then(result => {
-            res.status(200).json({
-                message: "Gemeente succesfully deleted from the collection"
-            });
+            if (result.deletedCount !== 0) {
+                console.log(result)
+                res.status(200).json({
+                    message: "Gemeente succesfully deleted from the collection"
+                })
+            } else {
+                res.status(404).json({
+                    message: "No valid Gemeente found for provided GemeentecodeGM"
+                })
+            }
         })
         .catch(err => {
             console.log(err);
