@@ -45,39 +45,9 @@ router.get("/:gemeenteId", (req, res, next) => {
 });
 
 /**
- * POST (ie CREATE) a single gemeente in the collection
+ * POST (ie CREATE) a single and/or a serie of gemeenten in the collection
  */
-router.post("/", (req, res, next) => {
-    const gemeente = new Gemeente({
-        _id: new mongoose.Types.ObjectId(),
-        Gemeentecode: req.body.Gemeentecode,
-        GemeentecodeGM: req.body.GemeentecodeGM,
-        Gemeentenaam: req.body.Gemeentenaam,
-        Provinciecode: req.body.Provinciecode,
-        ProvinciecodePV: req.body.ProvinciecodePV,
-        Provincienaam: req.body.Provincienaam
-    });
-    gemeente
-        .save()
-        .then(result => {
-            console.log(result);
-            res.status(201).json({
-                message: "Handling POST requests to /gemeenten",
-                createdGemeente: result
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-});
-
-/**
- * POST (ie CREATE) a serie of gemeenten in the collection
- */
-router.post("/insertbatch", (req, res, next) => {
+router.post("/insert", (req, res, next) => {
     Gemeente.insertMany(req.body)
         .then(result => {
             console.log(result);

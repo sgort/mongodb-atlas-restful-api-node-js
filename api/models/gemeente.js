@@ -2,12 +2,12 @@ const mongoose = require('mongoose');
 
 const gemeenteSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    Gemeentecode: Number,
-    GemeentecodeGM: String,
-    Gemeentenaam: String,
-    Provinciecode: Number,
-    ProvinciecodePV: String,
-    Provincienaam: String
+    Gemeentecode: { type: Number, required: true},
+    GemeentecodeGM: { type: String, required: true},
+    Gemeentenaam: { type: String, required: true},
+    Provinciecode: { type: Number, required: true},
+    ProvinciecodePV: { type: String, required: true},
+    Provincienaam: { type: String, required: true}
 }, { collection: 'gemeenten' });
 
 module.exports = mongoose.model('Gemeente', gemeenteSchema);
