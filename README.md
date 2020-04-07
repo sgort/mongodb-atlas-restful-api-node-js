@@ -25,6 +25,7 @@ Connected to `demo`!
 
 Currently support these endpoints:
 
+### Gemeenten
 - GET all gemeenten of the collection
 `localhost:3000/gemeenten`
 - POST a single and/or a serie of gemeenten into the collection
@@ -36,6 +37,17 @@ Currently support these endpoints:
 - PATCH a single gemeente in the collection
 `localhost:3000/gemeenten/:GemeentecodeGM`
 
+### Waterschappen
+- GET all waterschappen of the collection
+`localhost:3000/waterschappen`
+- POST a single and/or a serie of waterschappen into the collection
+`localhost:3000/waterschappen/insert`
+- GET a single waterschap from the collection
+`localhost:3000/waterschappen/:WaterschapKey`
+- DELETE a single waterschap from the collection
+`localhost:3000/waterschappen/:WaterschapKey`
+- PATCH a single waterschap in the collection
+`localhost:3000/waterschappen/:WaterschapKey`
 
 ### Preview of DisciplMongoDB Atlas
 ![Screenshot from 2020-04-06 11-18-33](https://user-images.githubusercontent.com/25812095/78544112-f178a880-77f9-11ea-80bf-09497b31c845.png)
