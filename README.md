@@ -50,4 +50,4 @@ Currently support these endpoints:
 `localhost:3000/waterschappen/:WaterschapKey`
 
 ### Preview of DisciplMongoDB Atlas
-![Screenshot from 2020-04-06 11-18-33](https://user-images.githubusercontent.com/25812095/78544112-f178a880-77f9-11ea-80bf-09497b31c845.png)
+![Screenshot from 2020-04-07 19-57-44](https://user-images.githubusercontent.com/25812095/78703225-1e1be580-790a-11ea-937b-697b8e9398c3.png)
