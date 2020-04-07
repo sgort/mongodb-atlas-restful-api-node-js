@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const Morgan = require("morgan");
 
 const gemeenteRoutes = require("./api/routes/gemeenten");
+const waterschappenRoutes = require("./api/routes/waterschappen")
 
 const CONNECTION_URL = "mongodb+srv://dbUser:" +
     process.env.MONGO_ATLAS_PW +
@@ -42,6 +43,7 @@ app.listen(3000, () => {
  * Routes which should handle requests
  */
 app.use("/gemeenten", gemeenteRoutes);
+app.use("/waterschappen", waterschappenRoutes);
 
 
 app.use((req, res, next) => {
