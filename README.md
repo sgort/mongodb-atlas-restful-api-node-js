@@ -23,7 +23,7 @@ Connected to `demo`!
 
 ```
 
-First use case to apply this with is process(es) concerning beslagvrije voet. See this (in Dutch)
+First use case to apply this with is process(es) concerning beslagvrije voet. See this [Google Doc](https://docs.google.com/document/d/1WwMV-4PNYnkiR3LTojHhvF5ZQY_YsWHdQPLP_F5iSW8/edit?usp=sharing) (in Dutch)
 
 Currently support these endpoints:
 ### Users
