@@ -1,5 +1,5 @@
 # mongodb-atlas-restful-api-node-js
-Illustrates building a RESTful API with Node.js and Express Framework
+Prototype code base for business use case(s) illustrating usage of a RESTful API with Node.js and Express Framework
 
 - morgan is used for logging requests to the console
 - nodemon is used for automatically restarting the server when your code changes
@@ -23,6 +23,7 @@ Connected to `demo`!
 
 ```
 
+First use case to apply this with is process(es) concerning beslagvrije voet. See this ![Google Doc](https://docs.google.com/document/d/1WwMV-4PNYnkiR3LTojHhvF5ZQY_YsWHdQPLP_F5iSW8/edit?usp=sharing) (in Dutch)
 
 Currently support these endpoints:
 ### Users
