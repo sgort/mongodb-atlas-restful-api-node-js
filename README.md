@@ -1,9 +1,10 @@
 # mongodb-atlas-restful-api-node-js
 Illustrates building a RESTful API with Node.js and Express Framework
 
-morgan is used for logging requests to the console
-
-nodemon is used for automatically restarting the server when your code changes
+- morgan is used for logging requests to the console
+- nodemon is used for automatically restarting the server when your code changes
+- bcrypt is used for uer token creation (ie signup & login)
+- jsonwebtoken is used for route protection POST, PATCH & DELETE requests (ie requires Authorization)
 
 `npm start` is all you need after cloning the repo
 
@@ -24,6 +25,16 @@ Connected to `demo`!
 
 
 Currently support these endpoints:
+### Users
+- GET all users from the collection
+`localhost:3000/users`
+- POST a new user into the collection
+`localhost:3000/users/signup`
+- DELETE a specific user from the collection (where '_id' is the MongoDB Schema.Types.ObjectId)
+`localhost:3000/users/:_id`
+- POST a JSON Web Token for a specific user (raw body input) to login (ie use the protected routes)
+`localhost:3000/users/login`
+
 
 ### Gemeenten
 - GET all gemeenten of the collection
