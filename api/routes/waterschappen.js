@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const checkAuth = require('../middelware/check-auth');
 const Waterschap = require("../models/waterschap");
 
 /**
@@ -73,8 +74,9 @@ router.get("/:waterschapId", (req, res, next) => {
 
 /**
  * POST (ie CREATE) a single and/or a serie of waterschappen in the collection
+ * Login via JSON Web Token authorization is required!
  */
-router.post("/insert", (req, res, next) => {
+router.post("/insert", checkAuth, (req, res, next) => {
     Waterschap.insertMany(req.body)
         .then(result => {
             console.log(result);
@@ -103,8 +105,9 @@ router.post("/insert", (req, res, next) => {
 /**
  * PATCH (ie UPDATE) a specific waterschap in the collection by `WaterschapKey`
  * Can handle incomplete set of properties
+ * Login via JSON Web Token authorization is required!
  */
-router.patch("/:waterschapId", (req, res, next) => {
+router.patch("/:waterschapId", checkAuth, (req, res, next) => {
     const id = req.params.waterschapId;
     Waterschap.updateMany({ WaterschapKey: { $eq: id } }, { $set: req.body }, { upsert: true })
         .exec()
@@ -128,8 +131,9 @@ router.patch("/:waterschapId", (req, res, next) => {
 
 /**
  * DELETE a specific waterschap in the collection by `WaterschapKey`
+ * Login via JSON Web Token authorization is required!
  */
-router.delete("/:waterschapId", (req, res, next) => {
+router.delete("/:waterschapId", checkAuth, (req, res, next) => {
     const id = req.params.waterschapId;
     Waterschap.deleteOne({ WaterschapKey: { $eq: id } })
         .exec()

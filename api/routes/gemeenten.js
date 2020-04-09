@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const checkAuth = require('../middelware/check-auth');
 const Gemeente = require("../models/gemeente");
 
 /**
  * GET (ie READ) all gemeenten in the collection
+ * No login required!
  */
 router.get("/", (req, res, next) => {
     Gemeente.find()
@@ -36,6 +38,7 @@ router.get("/", (req, res, next) => {
 
 /**
  * GET (ie READ) a specific gemeente in the collection by `GemeentecodeGM`
+ * No login required!
  */
 router.get("/:gemeenteId", (req, res, next) => {
     const id = req.params.gemeenteId;
@@ -75,8 +78,9 @@ router.get("/:gemeenteId", (req, res, next) => {
 
 /**
  * POST (ie CREATE) a single and/or a serie of gemeenten in the collection
+ * Login via JSON Web Token authorization is required!
  */
-router.post("/insert", (req, res, next) => {
+router.post("/insert", checkAuth, (req, res, next) => {
     Gemeente.insertMany(req.body)
         .then(result => {
             console.log(result);
@@ -106,8 +110,9 @@ router.post("/insert", (req, res, next) => {
 /**
  * PATCH (ie UPDATE) a specific gemeente in the collection by `GemeentecodeGM`
  * Can handle incomplete set of properties
+ * Login via JSON Web Token authorization is required!
  */
-router.patch("/:gemeenteId", (req, res, next) => {
+router.patch("/:gemeenteId", checkAuth, (req, res, next) => {
     const id = req.params.gemeenteId;
     Gemeente.updateMany({ GemeentecodeGM: { $eq: id } }, { $set: req.body }, { upsert: true })
         .exec()
@@ -131,8 +136,9 @@ router.patch("/:gemeenteId", (req, res, next) => {
 
 /**
  * DELETE a specific gemeente in the collection by `GemeentecodeGM`
+ * Login via JSON Web Token authorization is required!
  */
-router.delete("/:gemeenteId", (req, res, next) => {
+router.delete("/:gemeenteId", checkAuth, (req, res, next) => {
     const id = req.params.gemeenteId;
     Gemeente.deleteOne({ GemeentecodeGM: { $eq: id } })
         .exec()
