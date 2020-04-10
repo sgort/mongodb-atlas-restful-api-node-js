@@ -26,6 +26,10 @@ Connected to `demo`!
 First use case to apply this with is process(es) concerning beslagvrije voet. See this [Google Doc](https://docs.google.com/document/d/1WwMV-4PNYnkiR3LTojHhvF5ZQY_YsWHdQPLP_F5iSW8/edit?usp=sharing) (in Dutch)
 
 Currently support these endpoints:
+### Natuurlijke Persoon
+- GET a specific Natuurlijke Persoon via [Haal Centraal BRP API](https://github.com/VNG-Realisatie/Haal-Centraal-BRP-bevragen/blob/master/docs/getting-started.md)
+`localhost:3000/inschrijvingbrp/:BSN`
+
 ### Users
 - GET all users from the collection
 `localhost:3000/users`
