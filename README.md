@@ -36,7 +36,7 @@ Currently support these endpoints:
 - POST a JSON Web Token for a specific user (raw body input) to login (ie use the protected routes)
 `localhost:3000/users/login`
 
-Where '_id' is the MongoDB Schema.Types.ObjectId
+Where `_id` is the MongoDB Schema.Types.ObjectId
 
 ### Invorderingen
 - GET all invorderingen of the collection
@@ -50,7 +50,7 @@ Where '_id' is the MongoDB Schema.Types.ObjectId
 - PATCH a single invordering in the collection
 `localhost:3000/invorderingen/:invorderingId`
 
-Where ':invorderingId' is the MongoDB Schema.Types.ObjectId.
+Where `:invorderingId` is the MongoDB Schema.Types.ObjectId
 
 ### Gemeenten
 - GET all gemeenten of the collection
