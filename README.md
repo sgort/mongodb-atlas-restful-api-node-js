@@ -36,6 +36,17 @@ Currently support these endpoints:
 - POST a JSON Web Token for a specific user (raw body input) to login (ie use the protected routes)
 `localhost:3000/users/login`
 
+### Invorderingen
+- GET all invorderingen of the collection
+`localhost:3000/invorderingen`
+- POST a single invordering into the collection
+`localhost:3000/invorderingen/insert`
+- GET a single invordering from the collection
+`localhost:3000/invorderingen/:invorderingId`
+- DELETE a single invordering from the collection
+`localhost:3000/invorderingen/:invorderingId`
+- PATCH a single invordering in the collection
+`localhost:3000/invorderingen/:invorderingId`
 
 ### Gemeenten
 - GET all gemeenten of the collection

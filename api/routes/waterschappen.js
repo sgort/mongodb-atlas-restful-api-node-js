@@ -5,11 +5,13 @@ const WaterschapController = require('../controllers/waterschap');
 
 /**
  * GET (ie READ) all waterschappen in the collection
+ * No login required!
  */
 router.get("/", WaterschapController.waterschap_list);
 
 /**
  * GET (ie READ) a specific waterschap in the collection by `WaterschapKey`
+ * No login required!
  */
 router.get("/:waterschapId", WaterschapController.waterschap_find_one);
 
