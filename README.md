@@ -77,4 +77,4 @@ Where ':invorderingId' is the MongoDB Schema.Types.ObjectId.
 `localhost:3000/waterschappen/:WaterschapKey`
 
 ### Preview of DisciplMongoDB Atlas
-![Screenshot from 2020-04-09 12-15-53](https://user-images.githubusercontent.com/25812095/78884867-eae96b80-7a5b-11ea-82e9-8b7b8d66eada.png)
+![Screenshot from 2020-04-10 10-44-54](https://user-images.githubusercontent.com/25812095/78977434-6e689280-7b18-11ea-81da-fd4789d2ba1a.png)
