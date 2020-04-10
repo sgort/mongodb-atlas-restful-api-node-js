@@ -31,10 +31,12 @@ Currently support these endpoints:
 `localhost:3000/users`
 - POST a new user into the collection
 `localhost:3000/users/signup`
-- DELETE a specific user from the collection (where '_id' is the MongoDB Schema.Types.ObjectId)
-`localhost:3000/users/:_id`
+- DELETE a specific user from the collection
+`localhost:3000/users/:userId`
 - POST a JSON Web Token for a specific user (raw body input) to login (ie use the protected routes)
 `localhost:3000/users/login`
+
+Where '_id' is the MongoDB Schema.Types.ObjectId
 
 ### Invorderingen
 - GET all invorderingen of the collection
@@ -47,6 +49,8 @@ Currently support these endpoints:
 `localhost:3000/invorderingen/:invorderingId`
 - PATCH a single invordering in the collection
 `localhost:3000/invorderingen/:invorderingId`
+
+Where ':invorderingId' is the MongoDB Schema.Types.ObjectId.
 
 ### Gemeenten
 - GET all gemeenten of the collection
