@@ -2,6 +2,7 @@ const Express = require("express");
 const BodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const Morgan = require("morgan");
+const cors = require("cors")
 
 const gemeenteRoutes = require("./api/routes/gemeenten");
 const waterschappenRoutes = require("./api/routes/waterschappen");
@@ -16,6 +17,7 @@ const DATABASE_NAME = "demo";
 
 const app = Express();
 
+app.use(cors());
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({ extended: true }));
 app.use(Morgan('dev'));
@@ -33,7 +35,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.listen(3000, () => {
+app.listen(9000, () => {
     mongoose.connect(CONNECTION_URL, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
         if (error) {
             throw error;
@@ -43,7 +45,7 @@ app.listen(3000, () => {
 });
 
 /**
- * Routes which should handle requests
+ * Routes which should handle requests 
  */
 app.use("/gemeenten", gemeenteRoutes);
 app.use("/waterschappen", waterschappenRoutes);
