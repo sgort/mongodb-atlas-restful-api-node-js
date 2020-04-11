@@ -23,7 +23,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src="logo192.png" className="App-logo" alt="logo" />
           <h1 className="App-title">React frontend for prototyping beslagvrije voet with API's</h1>
         </header>
         <p className="App-intro">{this.state.apiResponse}</p>
